@@ -46,13 +46,11 @@ jobs:
     - name: Run all tests
       run: npm run test
 
-  build:
-    needs: build_test
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to production
-        uses: johnbeynon/render-deploy-action@v0.0.8
+      - uses: JorgeLNJunior/render-deploy@v1.4.5
         with:
-          service-id: ${{ secrets.RENDER_API_KEY }}
-          api-key: ${{ secrets.SERVICE_KEY }}
-          wait-for-success: true
+          service_id: ${{ secrets.RENDER_API_KEY }}
+          api_key: ${{ secrets.SERVICE_KEY }}
+          wait_deploy: true
