@@ -9,13 +9,16 @@ on:
 jobs:
   build_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
     steps:
     - name: clone the github repo on the runner
       uses: actions/checkout@v4
-    - name: Use Node.js version 22
+    - name: Use Node.js version ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version: 22.x
+        node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: install program dependencies
       run: npm install
